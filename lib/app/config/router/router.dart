@@ -2,6 +2,7 @@
 // import 'package:chater/app/modules/auth/views/splash_screen.dart';
 import 'package:firebase/app/config/router/my_named_routes.dart';
 import 'package:firebase/app/modules/auth/views/login.dart';
+import 'package:firebase/app/modules/auth/views/register.dart';
 import 'package:firebase/app/modules/auth/views/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -38,6 +39,17 @@ abstract class AppRouter {
           child:
               // SizedBox()
               const LoginScreen(),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: "/${MyNamedRoutes.register}",
+        name: MyNamedRoutes.register,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          child:
+              // SizedBox()
+              RegisterScreen(),
         ),
       ),
     ],
