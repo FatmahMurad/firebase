@@ -45,13 +45,15 @@ class _MyFormFieldState extends State<MyFormFields> {
               labelText: context.translate.email,
               prefixIcon: const Icon(Icons.email),
               obscureText: false,
-              onChanged: null,
+              onChanged: (val) {
+                print("");
+              },
               validator: (value) {
                 return _authValidators.emailValidator(value);
               },
             ),
             SizedBox(
-              height: context.screenHeight * 0.005,
+              height: context.screenHeight * 0.02,
             ),
             MyTextFormField(
               textEditingController: userNameController,
@@ -63,14 +65,15 @@ class _MyFormFieldState extends State<MyFormFields> {
               onChanged: null,
             ),
             SizedBox(
-              height: context.screenHeight * 0.005,
+              height: context.screenHeight * 0.02,
             ),
             MyTextFormField(
               textEditingController: passwordController,
               myFocusNode: passwordNode,
               myTextInputAction: TextInputAction.next,
               labelText: context.translate.password,
-              prefixIcon: const Icon(Icons.remove_red_eye_outlined),
+              prefixIcon: const Icon(Icons.password),
+              suffixIcon: const Icon(Icons.remove_red_eye_outlined),
               obscureText: true,
               onChanged: null,
             ),

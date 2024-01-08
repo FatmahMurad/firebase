@@ -1,3 +1,4 @@
+import 'package:firebase/app/core/extensions/build_context_extentions.dart';
 import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatelessWidget {
@@ -25,24 +26,27 @@ class MyTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: textEditingController,
-      focusNode: myFocusNode,
-      textInputAction: myTextInputAction,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+    return SizedBox(
+      height: context.screenHeight * 0.07,
+      child: TextFormField(
+        controller: textEditingController,
+        focusNode: myFocusNode,
+        textInputAction: myTextInputAction,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          label: Text(labelText),
+          prefixIcon: prefixIcon,
+          suffix: IconButton(
+            onPressed: togglePassword,
+            icon: suffixIcon ?? SizedBox(),
+          ),
         ),
-        label: Text(labelText),
-        prefixIcon: prefixIcon,
-        suffix: IconButton(
-          onPressed: togglePassword,
-          icon: suffixIcon ?? SizedBox(),
-        ),
+        obscureText: obscureText,
+        validator: validator,
+        onChanged: onChanged,
       ),
-      obscureText: obscureText,
-      validator: validator,
-      onChanged: onChanged,
     );
   }
 }
