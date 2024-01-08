@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342495504887",
+    "project_id": "fatmah-96f44",
+    "storage_bucket": "fatmah-96f44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342495504887:android:7ff58a12a7ad2da1ff66f2",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqrcQhYhGMb0gIuih2AfjxbDlBPIneuqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
