@@ -1,16 +1,19 @@
 import 'package:firebase/app/core/extensions/build_context_extentions.dart';
 import 'package:firebase/app/modules/auth/domain/helper/auth_validator.dart';
+import 'package:firebase/app/modules/auth/domain/provider/auth_providers.dart';
+import 'package:firebase/app/modules/auth/domain/provider/controller/text_form_provider.dart';
 import 'package:firebase/app/modules/auth/widgets/my_textform_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyFormFields extends StatefulWidget {
+class MyFormFields extends ConsumerStatefulWidget {
   const MyFormFields({super.key, required this.formKey});
   final GlobalKey<FormState> formKey;
   @override
-  State<MyFormFields> createState() => _MyFormFieldState();
+  ConsumerState<MyFormFields> createState() => _MyFormFieldState();
 }
 
-class _MyFormFieldState extends State<MyFormFields> {
+class _MyFormFieldState extends ConsumerState<MyFormFields> {
   final _authValidators = AuthValidators();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -32,6 +35,7 @@ class _MyFormFieldState extends State<MyFormFields> {
 
   @override
   Widget build(BuildContext context) {
+    final formProvider = ref.watch(authFormController);
     return Form(
       key: widget.formKey,
       child: Padding(
@@ -45,8 +49,8 @@ class _MyFormFieldState extends State<MyFormFields> {
               labelText: context.translate.email,
               prefixIcon: const Icon(Icons.email),
               obscureText: false,
-              onChanged: (val) {
-                print("");
+              onChanged: (value) {
+                formProvider.setEmailField(value);
               },
               validator: (value) {
                 return _authValidators.emailValidator(value);
@@ -62,7 +66,9 @@ class _MyFormFieldState extends State<MyFormFields> {
               labelText: context.translate.userName,
               prefixIcon: const Icon(Icons.person),
               obscureText: false,
-              onChanged: null,
+              onChanged: (value) {
+                formProvider.setUserNameField(value);
+              },
             ),
             SizedBox(
               height: context.screenHeight * 0.02,
@@ -73,9 +79,17 @@ class _MyFormFieldState extends State<MyFormFields> {
               myTextInputAction: TextInputAction.next,
               labelText: context.translate.password,
               prefixIcon: const Icon(Icons.password),
-              suffixIcon: const Icon(Icons.remove_red_eye_outlined),
-              obscureText: true,
-              onChanged: null,
+              suffixIcon: Icon(formProvider.togglePassword
+                  ? Icons.remove_red_eye_outlined
+                  : Icons.remove_red_eye_rounded),
+              obscureText: formProvider.togglePassword ? true : false,
+              onChanged: (value) {
+                formProvider.setPasswordField(value);
+              },
+              togglePassword: () {
+                formProvider.togglePasswordIcon();
+              },
+              validator: (input) => _authValidators.passwordVlidator(input),
             ),
           ],
         ),
