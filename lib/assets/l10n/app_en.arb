@@ -1,4 +1,9 @@
 {
     "login": "login",
-    "register":"Register"
+    "register":"Register",
+    "email":"Email",
+    "userName":"Username",
+    "password":"Password",
+    "googleSignIn":"Google Sign In",
+    "chats":""
 }
