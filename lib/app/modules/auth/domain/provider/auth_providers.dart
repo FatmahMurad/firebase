@@ -18,7 +18,10 @@ final authControllerProvider =
 });
 
 final authStateProvider = StreamProvider<User?>((ref) {
-  final authRepository = ref.watch(authRepositoryProvider);
+  final authRepository = AuthRepo(FirebaseAuth.instance);
+  //ref.watch(authRepositoryProvider);
   ref.read(authControllerProvider);
   return authRepository.authStateChanged;
 });
+final checkIfAuthinticatedFutureProvider =
+    FutureProvider((ref) => ref.watch(authStateProvider));

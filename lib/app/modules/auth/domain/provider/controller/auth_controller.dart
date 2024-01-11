@@ -40,11 +40,14 @@ class AuthController extends StateNotifier<AuthState> {
     }
   }
 
-  Future<void> signOut() async {
+  Future<bool> signOut() async {
     try {
       await _authRepo.signOut();
+
+      state = state.copyWith(isAuth: false, error: null);
+      return true;
     } catch (e) {
-      throw e.toString();
+      return false;
     }
   }
 }
